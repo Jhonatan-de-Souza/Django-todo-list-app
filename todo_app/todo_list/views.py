@@ -1,6 +1,7 @@
 from django.shortcuts import HttpResponse, render, redirect
 from django.http import HttpRequest
 from .forms import TodoForm
+from .models import Todo
 
 
 def create(request: HttpRequest) -> HttpResponse:
@@ -16,3 +17,8 @@ def create(request: HttpRequest) -> HttpResponse:
 
 def home(request: HttpRequest) -> HttpResponse:
     return HttpResponse('we home 😎')
+
+
+def list_todos(request: HttpRequest) -> HttpResponse:
+    todos = Todo.objects.all()  # Maybe find out how to get only a subset
+    return render(request, 'todo/home.html', context={'todos': todos})
