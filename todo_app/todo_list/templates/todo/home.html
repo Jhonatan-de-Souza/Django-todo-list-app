@@ -23,12 +23,18 @@
                 </tr>
             </thead>
             <tbody>
-                {% for todo in todos %}
+                {% for todo in page_obj.object_list %}
                 <tr>
                     <td>{{ todo.id }}</td>
                     <td>{{ todo.title }}</td>
                     <td>{{ todo.description }}</td>
-                    <td>{{ todo.status|yesno:"Completed,Not Completed" }}</td>
+                    <td>
+                        <form method="POST" action="{% url 'todo_list:toggle_status' todo.id %}">
+                            {% csrf_token %}
+                            <input type="checkbox" name="status" {% if todo.status %}checked{% endif %}
+                                onChange="this.form.submit()">
+                        </form>
+                    </td>
                     <td>
                         <a href="{% url 'todo_list:update' todo.id %}" class="btn btn-sm btn-warning">Edit</a>
                         <a href="{% url 'todo_list:delete' todo.id %}" class="btn btn-sm btn-danger">Delete</a>
@@ -41,7 +47,29 @@
                 {% endfor %}
             </tbody>
         </table>
+
+        <!-- Pagination Controls -->
+        <nav>
+            <ul class="pagination">
+                {% if page_obj.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+                </li>
+                {% endif %}
+                {% for num in page_obj.paginator.page_range %}
+                <li class="page-item {% if num == page_obj.number %}active{% endif %}">
+                    <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                </li>
+                {% endfor %}
+                {% if page_obj.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a>
+                </li>
+                {% endif %}
+            </ul>
+        </nav>
     </div>
+
 </body>
 
 </html>

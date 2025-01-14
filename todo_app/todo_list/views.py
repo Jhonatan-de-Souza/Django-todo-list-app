@@ -2,6 +2,16 @@ from django.shortcuts import HttpResponse, render, redirect, get_object_or_404
 from django.http import HttpRequest
 from .forms import TodoForm
 from .models import Todo
+from django.core.paginator import Paginator
+from django.views.decorators.http import require_POST
+
+
+@require_POST
+def toggle_status(request: HttpRequest, id: int) -> HttpResponse:
+    todo = get_object_or_404(Todo, id=id)
+    todo.status = not todo.status
+    todo.save()
+    return redirect('todo_list:home')
 
 
 def create(request: HttpRequest) -> HttpResponse:
@@ -19,9 +29,11 @@ def home(request: HttpRequest) -> HttpResponse:
 
 
 def list_todos(request: HttpRequest) -> HttpResponse:
-    print('listing all todos')
-    todos = Todo.objects.all()[:10]  # Maybe find out how to get only a subset
-    return render(request, 'todo/home.html', context={'todos': todos})
+    todos = Todo.objects.all().filter(status=False)
+    paginator = Paginator(todos, 10)
+    page_number = request.GET.get('page', 1)
+    page_obj = paginator.get_page(page_number)
+    return render(request, 'todo/home.html', context={'page_obj': page_obj})
 
 
 def update(request: HttpRequest, id: int) -> HttpResponse:
