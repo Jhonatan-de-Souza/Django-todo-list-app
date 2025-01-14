@@ -1,10 +1,6 @@
 from django.shortcuts import render, redirect, HttpResponse
 from .forms import TodoForm
 
-# def create(request):
-#     return render(request, template_name='todo/create.html')
-
-
 def create(request):
     if request.method == 'POST':
         form = TodoForm(request.POST)
