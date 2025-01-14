@@ -1,4 +1,4 @@
-from django.shortcuts import HttpResponse, render, redirect
+from django.shortcuts import HttpResponse, render, redirect, get_object_or_404
 from django.http import HttpRequest
 from .forms import TodoForm
 from .models import Todo
@@ -24,9 +24,20 @@ def list_todos(request: HttpRequest) -> HttpResponse:
     return render(request, 'todo/home.html', context={'todos': todos})
 
 
-def delete(request: HttpRequest) -> HttpResponse:
-    pass
+def update(request: HttpRequest, id: int) -> HttpResponse:
+    todo = get_object_or_404(Todo, id=id)
+    if request.method == 'POST':
+        form = TodoForm(request.POST, instance=todo)
+        if form.is_valid():
+            form.save()
+            return redirect('todo_list:home')
+    form = TodoForm(instance=todo)
+    return render(request, 'todo/update.html', context={'form': form, 'todo': todo})
 
 
-def update(request: HttpRequest) -> HttpResponse:
-    pass
+def delete(request: HttpRequest, id: int) -> HttpResponse:
+    todo = get_object_or_404(Todo, id=id)
+    if request.method == 'POST':
+        todo.delete()
+        return redirect('todo_list:home')
+    return render(request, 'todo/delete.html', context={'todo': todo})
