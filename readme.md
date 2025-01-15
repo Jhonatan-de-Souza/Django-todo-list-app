@@ -1,5 +1,5 @@
-# Free The Barber
-A simple Django Todo List
+# My Todo List
+A simple Django Todo List 
 
 # Initial Goal
 Showcase Django skills
@@ -17,6 +17,7 @@ Showcase Django skills
 * Bootstrap 5
 * PostgreSQL(hosted on supabase)
 * psycopg2-binary
+* virtualenv
 
 # Functionalities
 * Create/List/Edit/Delete Todos
