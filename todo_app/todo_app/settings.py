@@ -78,8 +78,12 @@ WSGI_APPLICATION = 'todo_app.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'postgres',  # Supabase DB name
+        'USER': 'postgres',  # Supabase user
+        'PASSWORD': '<your_password>',  # Replace with your Supabase password
+        'HOST': '<your_host>',  # Replace with your Supabase host (e.g., db.xxxxx.supabase.co)
+        'PORT': '5432',  # Default PostgreSQL port
     }
 }
 
