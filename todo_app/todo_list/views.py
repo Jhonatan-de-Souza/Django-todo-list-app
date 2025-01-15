@@ -29,7 +29,7 @@ def home(request: HttpRequest) -> HttpResponse:
 
 
 def list_todos(request: HttpRequest) -> HttpResponse:
-    todos = Todo.objects.all().filter(status=False)
+    todos = Todo.objects.all().filter(status=False).order_by('-created_at')
     paginator = Paginator(todos, 10)
     page_number = request.GET.get('page', 1)
     page_obj = paginator.get_page(page_number)

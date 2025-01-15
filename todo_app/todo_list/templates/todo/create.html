@@ -1,3 +1,4 @@
+{% load crispy_forms_tags %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,22 +11,27 @@
 
 <body>
     <form method="POST">
-        <h1>New Todo</h1>
-        {% if form.non_field_errors %}
-        <div class="alert alert-danger">
-            <ul>
-                {% for error in form.non_field_errors %}
-                <li>{{ error }}</li>
-                {% endfor %}
-            </ul>
-        </div>
-        {% endif %}
-        {% csrf_token %}
-        {{ form.as_p }}
+        <div class="container">
 
-        <button type="submit" class="btn btn-primary">Add Todo</button>
+            {% if form.non_field_errors %}
+            <div class="alert alert-danger">
+                <ul>
+                    {% for error in form.non_field_errors %}
+                    <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+
+            <h1>New Todo</h1>
+            {% csrf_token %}
+            {{ form|crispy }}
+
+            <button type="submit" class="btn btn-primary">Add Todo</button>
     </form>
     <a href="{% url 'todo_list:home' %}"></a>
+    </div>
+
 
 </body>
 
