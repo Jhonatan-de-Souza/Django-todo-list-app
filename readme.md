@@ -22,9 +22,6 @@ Showcase Django skills
 # Functionalities
 * Create/List/Edit/Delete Todos
 
-# How to Run
-1. Download project
-2. Install requirements from requirements.txt
-3. `cd todo_app`
-4. `python manage.py runserver`
+# How to use app
+- Open the app here: link
 
