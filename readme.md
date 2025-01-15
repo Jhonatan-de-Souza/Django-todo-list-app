@@ -9,11 +9,14 @@ Showcase Django skills
 - Use of django templates
 - Use of django urls
 - Use of django views
+- Use of environment variables
 
-# Tecnhologies used
+# Libraries and technologies used
 * Django
 * Crispy Forms
 * Bootstrap 5
+* PostgreSQL(hosted on supabase)
+* psycopg2-binary
 
 # Functionalities
 * Create/List/Edit/Delete Todos
