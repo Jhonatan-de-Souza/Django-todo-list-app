@@ -72,9 +72,11 @@ WSGI_APPLICATION = 'todo_app.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
+# Replace the SQLite DATABASES configuration with PostgreSQL:
 DATABASES = {
     'default': dj_database_url.config(
-        default=os.getenv('DB_CONNECTION_STRING'),
+        # Replace this value with your local database's connection string.
+        default='postgresql://postgres:postgres@localhost:5432/todo_app',
         conn_max_age=600
     )
 }
