@@ -18,6 +18,7 @@ Showcase Django skills
 * PostgreSQL(hosted on supabase)
 * psycopg2-binary
 * virtualenv
+* Hosted App(using render)
 
 # Functionalities
 * Create/List/Edit/Delete Todos
