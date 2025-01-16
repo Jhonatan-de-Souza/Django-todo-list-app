@@ -13,3 +13,9 @@ python manage.py collectstatic --no-input
 
 # Apply any outstanding database migrations
 python manage.py migrate
+
+# Create superuser if not created yet
+if [[ $CREATE_SUPERUSER ]];
+then
+  python manage.py createsuperuser --no-input --email "$DJANGO_SUPERUSER_EMAIL"
+fi

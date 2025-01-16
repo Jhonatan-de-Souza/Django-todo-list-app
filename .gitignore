@@ -1,5 +1,13 @@
 /jhonatan
 
+# Visual Studio Code # 
+.vscode/* 
+!.vscode/settings.json 
+!.vscode/tasks.json 
+!.vscode/launch.json 
+!.vscode/extensions.json 
+.history
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
