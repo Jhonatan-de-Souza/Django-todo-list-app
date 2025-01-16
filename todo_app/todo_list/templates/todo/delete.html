@@ -9,14 +9,22 @@
 </head>
 
 <body>
-    <div class="container mt-5">
-        <h1>Are you sure you want to delete "{{ todo.title }}"?</h1>
-        <form method="POST">
-            {% csrf_token %}
-            <button type="submit" class="btn btn-danger">Yes, Delete</button>
-            <a href="{% url 'todo_list:home' %}" class="btn btn-secondary">Cancel</a>
-        </form>
-    </div>
+    {% extends "base.html" %}
+
+    {% block title %}
+        Delete Todo
+    {% endblock %}
+
+    {% block content %}
+        <div class="container mt-5">
+            <h1>Are you sure you want to delete "{{ todo.title }}"?</h1>
+            <form method="POST">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger">Yes, Delete</button>
+                <a href="{% url 'todo_list:home' %}" class="btn btn-secondary">Cancel</a>
+            </form>
+        </div>
+    {% endblock %}
 </body>
 
 </html>
